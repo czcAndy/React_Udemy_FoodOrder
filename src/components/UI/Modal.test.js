@@ -1,4 +1,4 @@
-import {getByText, render} from '@testing-library/react'
+import {fireEvent, getByText, render, screen} from '@testing-library/react'
 import Modal from "./Modal";
 
 describe ('<Modal>', () => {
@@ -17,5 +17,13 @@ describe ('<Modal>', () => {
     it('renders with content', () => {
         const {getByText} = render(<Modal><div>Test</div></Modal>, document.getElementById('overlays'));
         expect(getByText(/^Test$/i)).toBeTruthy();
+    });
+
+    it('forwards close call', () => {
+        const mock = jest.fn();
+        render(<Modal onClose={mock}/>);
+        const backdrop = document.getElementById('backdrop'); //screen. funtions don't make sense
+        fireEvent.click(backdrop);
+        expect(mock).toHaveBeenCalled();
     })
 })
