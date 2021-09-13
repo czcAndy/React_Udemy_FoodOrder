@@ -1,6 +1,7 @@
 import { fireEvent, getByText, getByRole, render,screen } from '@testing-library/react';
 import App from './App';
 
+
 test('renders learn react link', () => {
   render(<App />);
 });
@@ -45,4 +46,5 @@ test('shows modal windown then closes it by clicking the modal backdrop', ()=> {
 
   fireEvent.click(document.getElementById('backdrop'));
   expect(screen.queryByText(/^Total Amount$/i)).toBeFalsy();
-})
+});
+
